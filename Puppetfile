@@ -77,8 +77,7 @@ mod 'stackforge/nova',      :git => "#{openstack_repo_prefix}-nova",      :ref =
 mod 'stackforge/quantum',   :git => "#{openstack_repo_prefix}-quantum",   :ref => openstack_module_branch
 mod 'stackforge/swift',     :git => "#{openstack_repo_prefix}-swift",     :ref => openstack_module_branch
 mod 'stackforge/ceilometer',:git => "#{openstack_repo_prefix}-ceilometer",:ref => openstack_module_branch
-# fix for bug/1195162 pending review
-mod 'stackforge/tempest',:git => "#{base_url}/michaeltchapman/puppet-tempest",:ref => 'master' 
+mod 'stackforge/tempest',   :git => "#{openstack_repo_prefix}-tempest",   :ref => openstack_module_branch 
 
 ##### Puppet Labs modules #####
 

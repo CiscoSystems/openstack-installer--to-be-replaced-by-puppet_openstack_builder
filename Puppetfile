@@ -50,7 +50,8 @@ mod 'manifests', :git => "#{base_url}/#{user_name}/#{release}-manifests", :ref =
 
 # This top level module contains the roles that are used to deploy openstack
 
-mod 'CiscoSystems/coi', :git => "#{base_url}/bodepd/puppet-COI", :ref => 'master'
+# Adds the tempest role, pull request pending
+mod 'CiscoSystems/coi', :git => "#{base_url}/michaeltchapman/puppet-COI", :ref => 'tempest'
 # no existing downstream module
 mod 'puppetlabs/postgresql', :git => "#{base_url}/puppetlabs/puppetlabs-postgresql", :ref => 'master'
 mod 'puppetlabs/puppetdb', :git => "#{base_url}/puppetlabs/puppetlabs-puppetdb", :ref => 'master'
@@ -76,7 +77,8 @@ mod 'stackforge/nova',      :git => "#{openstack_repo_prefix}-nova",      :ref =
 mod 'stackforge/quantum',   :git => "#{openstack_repo_prefix}-quantum",   :ref => openstack_module_branch
 mod 'stackforge/swift',     :git => "#{openstack_repo_prefix}-swift",     :ref => openstack_module_branch
 mod 'stackforge/ceilometer',:git => "#{openstack_repo_prefix}-ceilometer",:ref => openstack_module_branch
-mod 'stackforge/tempest',:git => "#{openstack_repo_prefix}-tempest",:ref => openstack_module_branch
+# fix for bug/1195162 pending review
+mod 'stackforge/tempest',:git => "#{base_url}/michaeltchapman/puppet-tempest",:ref => 'master' 
 
 ##### Puppet Labs modules #####
 

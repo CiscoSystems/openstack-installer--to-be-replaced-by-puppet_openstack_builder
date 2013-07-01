@@ -89,8 +89,8 @@ else
   # deploy the vms for a multi-node deployment
   deploy_multi_node_vms
   
-  vagrant ssh build -c 'sudo /tmp/test_nova.sh;exit $?'
-  vagrant ssh build -c 'ping -c 2 172.16.2.129;exit $?'
+  vagrant ssh control_basevm -c 'sudo /tmp/test_nova.sh;exit $?'
+  vagrant ssh control_basevm -c 'ping -c 2 172.16.2.129;exit $?'
   
   if [ $? -eq 0 ]
     then

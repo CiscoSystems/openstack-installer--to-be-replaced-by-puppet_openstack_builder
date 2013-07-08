@@ -31,7 +31,7 @@ node /control-server/ {
 
   $role           = 'openstack'
   $openstack_role = 'controller'
-  include coi::roles::controller
+  include coi::roles::controller::tempest
 
 }
 

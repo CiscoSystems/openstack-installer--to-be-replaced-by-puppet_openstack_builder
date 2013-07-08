@@ -50,7 +50,6 @@ mod 'manifests', :git => "#{base_url}/#{user_name}/#{release}-manifests", :ref =
 
 # This top level module contains the roles that are used to deploy openstack
 
-mod 'CiscoSystems/coi', :git => "#{base_url}/bodepd/puppet-COI", :ref => 'master'
 # no existing downstream module
 mod 'puppetlabs/postgresql', :git => "#{base_url}/puppetlabs/puppetlabs-postgresql", :ref => 'master'
 mod 'puppetlabs/puppetdb', :git => "#{base_url}/puppetlabs/puppetlabs-puppetdb", :ref => 'master'
@@ -76,7 +75,7 @@ mod 'stackforge/nova',      :git => "#{openstack_repo_prefix}-nova",      :ref =
 mod 'stackforge/quantum',   :git => "#{openstack_repo_prefix}-quantum",   :ref => openstack_module_branch
 mod 'stackforge/swift',     :git => "#{openstack_repo_prefix}-swift",     :ref => openstack_module_branch
 mod 'stackforge/ceilometer',:git => "#{openstack_repo_prefix}-ceilometer",:ref => openstack_module_branch
-mod 'stackforge/tempest',:git => "#{openstack_repo_prefix}-tempest",:ref => openstack_module_branch
+mod 'stackforge/tempest',   :git => "#{openstack_repo_prefix}-tempest",   :ref => openstack_module_branch 
 
 ##### Puppet Labs modules #####
 
@@ -114,7 +113,7 @@ mod 'CiscoSystems/vswitch', :git => "#{base_url}/CiscoSystems/puppet-vswitch", :
 
 ##### Modules without upstreams #####
 
-# TODO - this is still pointing at my fork
+mod 'CiscoSystems/coi', :git => "#{base_url}/CiscoSystems/puppet-COI", :ref => 'master'
 mod 'CiscoSystems/coe', :git => "#{base_url}/CiscoSystems/puppet-coe", :ref => branch_name
 mod 'CiscoSystems/cobbler', :git => "#{base_url}/CiscoSystems/puppet-cobbler", :ref => branch_name
 mod 'CiscoSystems/apt-cacher-ng', :git => "#{base_url}/CiscoSystems/puppet-apt-cacher-ng", :ref => branch_name

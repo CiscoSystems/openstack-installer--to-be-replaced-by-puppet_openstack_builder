@@ -7,16 +7,14 @@
 function destroy_allinone_vms() {
   # we need to kill any existing machines on the same
   # system that conflict with the ones we want to spin up
-  for i in build-server  compute-server02 control-server ; do
-    if VBoxManage list vms | grep $i; then
-      VBoxManage controlvm    $i poweroff || true
-      # this sleep statement is to fix an issue where
-      # machines are still in a locked state after the
-      # controlvm poweroff command should be completed
-      sleep 1
-      VBoxManage unregistervm $i --delete
-    fi
-  done
+  if VBoxManage list vms | grep allinone; then
+    VBoxManage controlvm    allinone poweroff || true
+    # this sleep statement is to fix an issue where
+    # machines are still in a locked state after the
+    # controlvm poweroff command should be completed
+    sleep 1
+    VBoxManage unregistervm allinone --delete
+  fi
 }
 
 function deploy_allinone_vms() {

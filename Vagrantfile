@@ -262,6 +262,39 @@ Vagrant::Config.run do |config|
     end
   end
 
+  # allinone server
+  config.vm.define :allinone do |config|
+    get_box(config, 'precise64')
+    setup_networks(config, '11')
+    setup_hostname(config, 'allinone')
+
+    config.vm.customize ["modifyvm", :id, "--memory", 4096]
+
+    # Configure apt mirror
+    config.vm.provision :shell do |shell|
+      shell.inline = "sed -i 's/us.archive.ubuntu.com/%s/g' /etc/apt/sources.list" % v_config['apt_mirror']
+    end
+
+    # Ensure DHCP isn't going to join us to a domain other than domain.name
+    # since puppet has to sign its cert against the domain it makes when it runs.
+    config.vm.provision :shell do |shell|
+      shell.inline = "sed -i 's/\#supersede/supersede/g' /etc/dhcp/dhclient.conf; sed -i 's/fugue.com home.vix.com/%s/g' /etc/dhcp/dhclient.conf; sed -i 's/domain-name,//g' /etc/dhcp/dhclient.conf" % v_config['domain']
+    end
+
+    config.vm.provision :shell do |shell|
+      shell.inline = "%s apt-get update; dhclient -r eth0 && dhclient eth0;" % apt_cache_proxy
+    end
+
+    apply_manifest(config, v_config, 'setup.pp')
+
+    apply_manifest(config, v_config)
+
+    # Configure puppet
+    config.vm.provision :shell do |shell|
+      shell.inline = 'if [ ! -h /etc/puppet/modules ]; then rmdir /etc/puppet/modules;ln -s /etc/puppet/modules-0 /etc/puppet/modules; fi; service apache2 restart'
+    end
+  end
+
   # Openstack control server
   config.vm.define :control_pxe do |config|
     config.vm.box = 'blank'

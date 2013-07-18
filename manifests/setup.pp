@@ -13,12 +13,8 @@
 # that Puppet will be installed on the bare-metal nodes
 # with the correct version
 include puppet::repo::puppetlabs
-package { 'puppet-common':
-  ensure => '3.2.2-1puppetlabs1',
-}
 package { 'puppet':
-  ensure  => '3.2.2-1puppetlabs1',
-  require => Package['puppet-common'],
+  ensure => '3.2.3-1puppetlabs1',
 }
 
 # dns resolution should be setup correctly

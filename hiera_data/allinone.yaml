@@ -8,9 +8,6 @@ external_interface: eth2
 external_bridge: br-ex
 keystone_db_password: keystone_db_password
 
-# puppet
-puppet_master_address: %{fqdn}
-autostart_puppet: true
 
 # glance config
 glance_db_password: glance_pass

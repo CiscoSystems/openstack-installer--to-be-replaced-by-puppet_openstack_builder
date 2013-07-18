@@ -289,10 +289,6 @@ Vagrant::Config.run do |config|
 
     apply_manifest(config, v_config)
 
-    # Configure puppet
-    config.vm.provision :shell do |shell|
-      shell.inline = 'if [ ! -h /etc/puppet/modules ]; then rmdir /etc/puppet/modules;ln -s /etc/puppet/modules-0 /etc/puppet/modules; fi; service apache2 restart'
-    end
   end
 
   # Openstack control server

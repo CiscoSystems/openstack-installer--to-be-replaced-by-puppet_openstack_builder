@@ -4,4 +4,3 @@ apt_mirror: 'us.archive.ubuntu.com'
 domain: 'domain.name'
 verbose: true
 #node_group: multi_node
-

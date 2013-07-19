@@ -34,6 +34,7 @@ internal_ip: %{ipaddress_eth3}
 # are applicable to multiple openstack roles
 
 # controller information
+controller_hostname:  allinone
 controller_node_internal: 192.168.242.11
 controller_node_public: 192.168.242.11
 controller_node_address: 192.168.242.11

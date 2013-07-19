@@ -1,4 +1,5 @@
 # time servers
+libvirt_type: qemu
 ntp_servers:
   - time-server.domain.name
 # domain name

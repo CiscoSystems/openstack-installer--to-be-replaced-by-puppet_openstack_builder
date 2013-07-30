@@ -16,6 +16,7 @@ glance_backend: file
 # only the controller needs to connect
 # to the quantum db
 quantum_db_password:   quantum_pass
+quantum_use_cisco_plugin: true
 
 # horizon
 horizon_secret_key: horizon_secret_key

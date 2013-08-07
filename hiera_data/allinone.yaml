@@ -55,7 +55,11 @@ rabbit_user: openstack_rabbit_user
 
 # ovs config
 tunnel_ip: %{ipaddress_eth3}
+vs_vlan_ranges: 'physnet1:200:300'
+$ovs_bridge_uplinks: ['br-ex:eth1']
+$ovs_bridge_mappings: ['physnet1:br-ex']
 
+# cinder config
 cinder_db_password: cinder_pass
 
 # used by test_file

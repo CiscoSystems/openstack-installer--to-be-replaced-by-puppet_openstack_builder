@@ -10,10 +10,10 @@ controller_hostname:  control-server
 
 # information for package repos
 openstack_release: precise-updates/grizzly
-package_repo: cloud_archive
+package_repo: cisco_repo
 
 # include your own repo mirror if you have one
-#openstack_repo_location:
+openstack_repo_location: http://koji-server.cisco.com/mash/grizzly-puppet-el6/x86_64/os/
 
 # this may need to be updated b/c we are using nova-conductor now
 nova_db_password:   nova_pass

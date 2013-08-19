@@ -1,6 +1,6 @@
 # time servers
 ntp_servers:
-  - ntp.esl.cisco.com
+  - time-server.domain.name
 # domain name
 domain_name: domain.name
 # interfaces for directing different types of traffic

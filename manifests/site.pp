@@ -8,6 +8,14 @@ node build-server {
 
 }
 
+node /allinone/ {
+
+  $role           = 'openstack'
+  $openstack_role = 'allinone'
+  include coi::roles::allinone
+
+}
+
 node /control-tempest-server/ {
 
   $role           = 'openstack'

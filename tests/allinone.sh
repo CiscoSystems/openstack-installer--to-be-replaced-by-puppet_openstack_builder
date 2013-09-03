@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+# specifies things that are specific to the
+# vagrant multi-node deployment scenario
+#
+
+function destroy_allinone_vms() {
+  # we need to kill any existing machines on the same
+  # system that conflict with the ones we want to spin up
+  if VBoxManage list vms | grep allinone; then
+    VBoxManage controlvm    allinone poweroff || true
+    # this sleep statement is to fix an issue where
+    # machines are still in a locked state after the
+    # controlvm poweroff command should be completed
+    sleep 1
+    VBoxManage unregistervm allinone --delete
+  fi
+}
+
+function deploy_allinone_vms() {
+  # build a cache vm if one does not already exist
+  if ! VBoxManage list vms | grep cache ; then
+    vagrant up cache 2>&1 | tee -a cache.log.$datestamp
+  fi
+
+  vagrant up allinone 2>&1 | tee -a allinone.log.$datestamp
+}

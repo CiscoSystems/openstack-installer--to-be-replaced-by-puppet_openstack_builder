@@ -84,4 +84,37 @@ Log into your controller at: ssh localadmin@192.168.242.10 (password ubuntu)
 
 and run through the 'Deploy Your First VM' section of this document:
 
-  http://docwiki.cisco.com/wiki/OpenStack:Folsom-Multinode#Creating_a_build_server
+  http://docwiki.cisco.com/wiki/OpenStack:Folsom-Multinode#Creating\_a\_build\_server
+
+
+## installing on bare metal (from scratch)
+
+Do the following on your build server:
+
+  * install puppet and git
+
+apt-get install puppet git rubygems
+
+  * run puppet apply to get your environment up correclty
+
+  * install librarian-puppet
+
+    mkdir vendor
+    export GEM_HOME=`pwd`/vendor
+    gem install thor --no-ri --no-rdoc
+    git clone git://github.com/bodepd/librarian-puppet-simple vendor/librarian-puppet-simple
+    export PATH=`pwd`/vendor/librarian-puppet-simple/bin/:$PATH
+
+  * install all of the required modules
+
+     librarian-puppet install --path /etc/puppet/modules
+
+  * move manifests, data, and module directories to to /etc/puppet
+
+  * run setup.pp
+
+    puppet apply /etc/puppet/manifests/setup.pp
+
+  * to build out the build server (as a puppetmaster), also run:
+
+    puppet apply /etc/puppet/manifests/site.pp --certname build-server

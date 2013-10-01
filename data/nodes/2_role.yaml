@@ -1,4 +1,10 @@
 nodes:
+  cache:
+    vagrant_name:    cache
+    memory:      2500
+    ip_number:   99
+    puppet_type: apply
+    apt_cache:   false
   build-server:
     vagrant_name: build
     memory:       2500
@@ -31,6 +37,7 @@ nodes:
       - 'stack-wait-build'
       - 'puppet-agent'
       - 'control-sig-compute'
+      - 'test-nova'
   compute-server02:
     memory:       2512
     ip_number:    21

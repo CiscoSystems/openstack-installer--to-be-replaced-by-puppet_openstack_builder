@@ -229,21 +229,11 @@ def make(n, q, args):
     # Put this into metadata and parse it on-node
     # from config drive. There are limits on the count
     # according to the doc but TODO confirm this
-    config_meta.update({ 'build_node_ip'               : build_node_ip,
-                      'controller_public_address'   : control_node_ip,
+    config_meta.update({'controller_public_address'   : control_node_ip,
                       'controller_internal_address' : control_node_ip,
                       'controller_admin_address'    : control_node_ip,
                       'cobbler_node_ip'             : build_node_ip,
                       'ci_test_id'                  : test_id
-
-                      # These should now be in scenario yaml
-                      #'tunnel_ip'                   : "%{ipaddress_eth1}",
-                      #'internal_ip'                 : "%{ipaddress_eth1}",
-                      #'ntp_servers'                 : ['ntp.esl.cisco.com'],
-                      #'initial_ntp'                 : 'ntp.esl.cisco.com',
-
-                      # This should come from an env variable
-                      #'installer_repo'              : 'michaeltchapman'
                     })
 
     dprint('Metadata With hardcodes ' + str(config_meta))
@@ -285,22 +275,16 @@ def make(n, q, args):
                        meta={'ci_test_id' : test_id})
 
 def get(n, q, args):
-    if args.test_id:
-        print "Servers for test: " + test_id
-        run_instances = []
-        instances = n.servers.list()
-        for instance in instances:
-            if 'ci_test_id' in instance.metadata:
-                if instance.metadata['ci_test_id'] == unicode(args.test_id):
-                    run_instances.append(instance)
-
-    else:
-        run_instances = {}
-        instances = n.servers.list()
-        for instance in instances:
-            if 'ci_test_id' in instance.metadata:
+    run_instances = {}
+    instances = n.servers.list()
+    for instance in instances:
+        if 'ci_test_id' in instance.metadata:
+            if ((args.test_id and instance.metadata['ci_test_id'] == unicode(args.test_id)) or not args.test_id):
                 if instance.metadata['ci_test_id'] not in run_instances:
-                    run_instances[instance.metadata['ci_test_id']] = [instance.id]
+                    run_instances[instance.metadata['ci_test_id']] = [instance]
                 else:
-                    run_instances[instance.metadata['ci_test_id']].append(instance.id)
-    print run_instances
+                    run_instances[instance.metadata['ci_test_id']].append(instance)
+    for test_id, servers in run_instances.items():
+        print "Test ID: " + test_id
+        for server in servers:
+            print "%-8.8s %16.16s" % (server.id, server.name)

@@ -15,12 +15,20 @@ import os
 import yaml
 
 def import_environ_keys(metadata):
+    """
+    Import any environment variables with the correct
+    prefix into the metadata dictionary
+    """
     for key,value in os.environ.items():
         if key[:8] == 'jenkins_':
             metadata[key[8:]] = value
     return metadata
 
 def import_yaml(path):
+    """
+    Import any data in user.yaml or jenkins.yaml
+    into the metadata dictionary
+    """
     metadata = {}
     if os.path.exists(path+'/hiera_data/user.yaml'):
         with open(path+'/hiera_data/user.yaml', 'r') as f:
@@ -37,5 +45,9 @@ def import_yaml(path):
     return metadata
 
 def build_metadata(path):
+    """
+    Create a metadata dictionary from yaml
+    and environment variables
+    """
     return import_environ_keys(import_yaml(path))
         

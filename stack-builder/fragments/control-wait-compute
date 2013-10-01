@@ -1,0 +1,28 @@
+function ovs_node_count() {
+    return $(ovs-vsctl show | grep remote_ip | wc - l)
+}
+
+ready=false
+
+# Wait until at least one node is available
+until [ $(ovs_node_count) -gt 0 ]; do
+    sleep(1)
+done
+
+until [ $ready -eq 'true']; do
+    sleep(5)
+    initnodes=$(ovs_node_count)
+    ready=true
+
+    # Check status of each node that is connected to ovs
+    for node in $(ovs-vsctl show | grep remote_ip | cut -d '"' -f 2); do
+        if [ ! $(curl http://$remote_ip/status | grep up) ]; then
+            ready=false
+        fi 
+    done
+
+    # if more nodes have come online then re-do the check
+    if [ initnodes -lt $(ovs_node_count) ] then
+        ready=false
+    fi
+done

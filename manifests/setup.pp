@@ -53,6 +53,9 @@ file { "${settings::confdir}/hiera.yaml":
   - "hostname/%{hostname}"
   - user
   - jenkins
+  - user.%{scenario}
+  - user.common
+  - "enable_ha/%{enable_ha}"
   - "cinder_backend/%{cinder_backend}"
   - "glance_backend/%{glance_backend}"
   - "rpc_type/%{rpc_type}"

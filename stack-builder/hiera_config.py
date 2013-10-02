@@ -38,7 +38,7 @@ def config_builder():
                     for key, value in meta.items():
                         if (y != None and key in y):
                             print "Setting : " + key + " with " + str(value)
-                            y[key] = str(value)
+                            y[key] = value
 
                 with open(path + '/' + yaml_file, 'w') as hiera_file:
                     hiera_file.write(yaml.dump(y, default_flow_style=False))

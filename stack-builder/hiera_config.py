@@ -9,12 +9,11 @@
     the metadata
 """
 
-import json
 import yaml
 import os
 
 hiera_dir = '/etc/puppet/data'
-metadata_path = '/mnt/config/openstack/latest/meta_data.json'
+metadata_path = '/root/meta_data.yaml'
 
 #debug
 #metadata_path = './sample.json'
@@ -23,7 +22,7 @@ metadata_path = '/mnt/config/openstack/latest/meta_data.json'
 def config_builder():
     # load metadata from config-drive
     with open(metadata_path, 'r') as metadata:
-       meta = json.loads(metadata.read())['meta']
+       meta = yaml.load(metadata.read())
        print meta
 
     # Set values specified in config_drive

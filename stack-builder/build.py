@@ -262,7 +262,7 @@ def make(n, q, args):
                     build_nic_port_list([ci_ports[0]['id']]),
                     deploy=build_deploy,
                     files={u'/root/hiera_config.py': build_server_hiera_config(),
-                           u'/root/meta-data.yaml' : config_yaml},
+                           u'/root/meta_data.yaml' : config_yaml},
                     meta={'ci_test_id' : test_id}
                     )
 
@@ -276,7 +276,7 @@ def make(n, q, args):
                        image, 
                        control_nics,
                        deploy=control_deploy,
-                       files={u'/root/meta-data.yaml' : config_yaml},
+                       files={u'/root/meta_data.yaml' : config_yaml},
                        meta={'ci_test_id' : test_id})
 
     compute_node = boot_puppetised_instance(n, 
@@ -284,7 +284,7 @@ def make(n, q, args):
                        image, 
                        build_nic_net_list([get_ci_network(q), test_net1]),
                        deploy=compute_deploy,
-                       files={u'/root/meta-data.yaml' : config_yaml},
+                       files={u'/root/meta_data.yaml' : config_yaml},
                        meta={'ci_test_id' : test_id})
 
 def get(n, q, args):

@@ -37,7 +37,7 @@ def config_builder():
                     y = yaml.load(hiera_file.read())
                     for key, value in meta.items():
                         if (y != None and key in y):
-                            print "Setting : " + key + " with " + value 
+                            print "Setting : " + key + " with " + str(value)
                             y[key] = str(value)
 
                 with open(path + '/' + yaml_file, 'w') as hiera_file:

@@ -230,10 +230,10 @@ def make(n, q, args):
     config_meta =  build_metadata(data_path)
     dprint('Metadata Without hardcodes ' + str(config_meta))
 
-    config_meta.update({'controller_public_address'   : control_node_ip,
-                      'controller_internal_address' : control_node_ip,
-                      'controller_admin_address'    : control_node_ip,
-                      'cobbler_node_ip'             : build_node_ip,
+    config_meta.update({'controller_public_address'   : str(control_node_ip),
+                      'controller_internal_address' : str(control_node_ip),
+                      'controller_admin_address'    : str(control_node_ip),
+                      'cobbler_node_ip'             : str(build_node_ip),
                       'ci_test_id'                  : test_id
                     })
 

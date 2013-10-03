@@ -23,6 +23,7 @@ until [ $ready = 'true' ]; do
     for node in $(ovs-vsctl show | grep remote_ip | cut -d '"' -f 2); do
         if [ ! $(curl http://"$nodes"/status | grep up) ]; then
             ready=false
+            echo node "not ready for test to run"
         fi 
     done
     sleep 5

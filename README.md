@@ -13,7 +13,6 @@ This setup requires that a few additional dependencies are installed:
 ## Developer instructions
 
 Developers should be started by installing the following simple utility:
-(I will eventually just have it bundled as a gem)
 
     mkdir vendor
     export GEM_HOME=`pwd`/vendor

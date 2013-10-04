@@ -13,13 +13,17 @@ This setup requires that a few additional dependencies are installed:
 ## Developer instructions
 
 Developers should be started by installing the following simple utility:
-(I will eventually just have it bundled as a gem)
 
     mkdir vendor
     export GEM_HOME=`pwd`/vendor
     gem install thor --no-ri --no-rdoc
     git clone git://github.com/bodepd/librarian-puppet-simple vendor/librarian-puppet-simple
     export PATH=`pwd`/vendor/librarian-puppet-simple/bin/:$PATH
+
+or you can install from rubygems, if you don't need to keep your gems
+separated:
+
+  gem install librarian-puppet-simple
 
 Once this library is installed, you can run the following command from this project's
 root directory. This will use the Puppetfile to clone the openstack modules and the COE manifests, into the modules directory, and can be easily configured to pull from your own repo instead of the Cisco or Stackforge repos. The default is to use the stackforge modules

@@ -50,6 +50,6 @@ def facter_config():
         meta = yaml.load(metadata.read())
         print meta
         for key,value in meta.items():
-            os.environ[key] = value
+            os.environ[key] = str(value)
 
 facter_config()

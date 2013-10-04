@@ -240,6 +240,7 @@ def make(n, q, args):
                       'controller_internal_address' : str(control_node_ip),
                       'controller_admin_address'    : str(control_node_ip),
                       'cobbler_node_ip'             : str(build_node_ip),
+                      'build_server_ip'             : str(build_node_ip),
                     })
 
     build_deploy = fragment.compose('build-server', data_path, fragment_path, scenario, initial_config_meta)

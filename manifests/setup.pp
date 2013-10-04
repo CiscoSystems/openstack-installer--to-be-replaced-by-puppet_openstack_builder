@@ -32,14 +32,16 @@ case $::osfamily {
   }
 }
 
-
 package { 'puppet':
   ensure  => $puppet_version,
 }
 
 # dns resolution should be setup correctly
-host {
-  'build-server': ip => '192.168.242.100', host_aliases => 'build-server.domain.name';
+if $::build_server_ip {
+  host { 'build-server':
+    ip => $::build_server_ip,
+    host_aliases => "build-server.${::build_server_domain_name}"
+  }
 }
 
 # set up our hiera-store!
@@ -53,6 +55,8 @@ file { "${settings::confdir}/hiera.yaml":
   - "hostname/%{hostname}"
   - user
   - jenkins
+  - user.%{scenario}
+  - user.common
   - "cinder_backend/%{cinder_backend}"
   - "glance_backend/%{glance_backend}"
   - "rpc_type/%{rpc_type}"

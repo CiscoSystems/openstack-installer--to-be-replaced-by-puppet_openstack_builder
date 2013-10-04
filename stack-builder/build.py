@@ -228,15 +228,12 @@ def make(n, q, args):
     # config is a dictionary updated from env vars and user supplied
     # yaml files to serve as input to hiera
     hiera_config_meta =  build_metadata(data_path, scenario, 'user')
-    dprint('Metadata Without hardcodes ' + str(hiera_config_meta))
 
     hiera_config_meta.update({'controller_public_address'   : str(control_node_ip),
                       'controller_internal_address' : str(control_node_ip),
                       'controller_admin_address'    : str(control_node_ip),
                       'cobbler_node_ip'             : str(build_node_ip),
                     })
-
-    dprint('Metadata With hardcodes ' + str(hiera_config_meta))
 
     initial_config_meta = build_metadata(data_path, scenario, 'config')
     initial_config_meta.update({'controller_public_address'   : str(control_node_ip),
@@ -256,7 +253,8 @@ def make(n, q, args):
     user_config_yaml = yaml.dump(hiera_config_meta, default_flow_style=False)
     initial_config_yaml = yaml.dump(initial_config_meta, default_flow_style=False)
 
-    dprint('Metadata Yaml: ' + str(config_yaml))
+    dprint('Config Yaml: \n' + str(initial_config_yaml))
+    dprint('User Yaml: \n' + str(user_config_yaml))
 
     build_node = boot_puppetised_instance(n, 
                     'build-server',

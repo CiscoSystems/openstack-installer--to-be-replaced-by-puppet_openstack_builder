@@ -234,12 +234,16 @@ def make(n, q, args):
                       'controller_internal_address' : str(control_node_ip),
                       'controller_admin_address'    : str(control_node_ip),
                       'cobbler_node_ip'             : str(build_node_ip),
-                      'ci_test_id'                  : test_id
                     })
 
     dprint('Metadata With hardcodes ' + str(hiera_config_meta))
 
     initial_config_meta = build_metadata(data_path, scenario, 'config')
+    initial_config_meta.update({'controller_public_address'   : str(control_node_ip),
+                      'controller_internal_address' : str(control_node_ip),
+                      'controller_admin_address'    : str(control_node_ip),
+                      'cobbler_node_ip'             : str(build_node_ip),
+                    })
 
     build_deploy = fragment.compose('build-server', data_path, fragment_path, scenario, initial_config_meta)
     control_deploy = fragment.compose('control-server', data_path, fragment_path, scenario, initial_config_meta)
@@ -260,7 +264,7 @@ def make(n, q, args):
                     build_nic_port_list([ci_ports[0]['id']]),
                     deploy=build_deploy,
                     files={u'/root/hiera_config.py': build_server_hiera_config(),
-                           u'/root/user.yaml' : user_config_yaml},
+                           u'/root/user.yaml' : user_config_yaml,
                            u'/root/config.yaml' : initial_config_yaml},
                     meta={'ci_test_id' : test_id}
                     )

@@ -13,7 +13,7 @@ import yaml
 import os
 
 hiera_dir = '/etc/puppet/data'
-metadata_path = '/root/meta_data.yaml'
+metadata_path = '/root/config.yaml'
 
 #debug
 #metadata_path = './sample.json'
@@ -43,4 +43,13 @@ def config_builder():
                 with open(path + '/' + yaml_file, 'w') as hiera_file:
                     hiera_file.write(yaml.dump(y, default_flow_style=False))
             
-config_builder()
+#config_builder()
+
+def facter_config():
+    with open(metadata_path, 'r') as metadata:
+        meta = yaml.load(metadata.read())
+        print meta
+        for key,value in meta.items():
+            os.environ[key] = value
+
+facter_config()

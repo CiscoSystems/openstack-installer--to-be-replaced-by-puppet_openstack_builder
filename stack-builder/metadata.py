@@ -20,8 +20,8 @@ def import_environ_keys(metadata, prefix):
     prefix into the metadata dictionary
     """
     for key,value in os.environ.items():
-        if key[:8] == prefix:
-            metadata[key[8:]] = value
+        if key[:9] == prefix:
+            metadata[key[9:]] = value
     return metadata
 
 def import_yaml(path, files):
@@ -44,13 +44,20 @@ def build_metadata(path, scenario, config):
     and environment variables
     """
     if config == "config":
-        prefix = 'osi_config_'
+        prefix = 'osi_conf_'
         files = ['config']
-        return import_environ_keys(import_yaml(path+'/'), prefix)
+        return import_environ_keys(import_yaml(path+'/', files), prefix)
     if config == 'user':
         prefix = 'osi_user_'
         files = ['user', 'jenkins', 'user.common', 'user.'+scenario]
-        return import_environ_keys(import_yaml(path+'/hiera_data/'), prefix)
+        return import_environ_keys(import_yaml(path+'/hiera_data/',files), prefix)
     else:
-        print "Invalid config type: choose from 'user' and 'config'"
+        print "Invalid config type: choose from 'user' and 'conf'"
 
+def show(n, q, args):
+    hostname = args.node
+    yaml_dir = args.yaml_dir
+    scenario = args.scenario
+    config   = args.config
+
+    print yaml.dump(build_metadata(yaml_dir, scenario, config), default_flow_style=False)

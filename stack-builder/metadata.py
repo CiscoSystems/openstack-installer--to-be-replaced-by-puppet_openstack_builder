@@ -14,40 +14,43 @@
 import os
 import yaml
 
-def import_environ_keys(metadata):
+def import_environ_keys(metadata, prefix):
     """
     Import any environment variables with the correct
     prefix into the metadata dictionary
     """
     for key,value in os.environ.items():
-        if key[:8] == 'jenkins_':
+        if key[:8] == prefix:
             metadata[key[8:]] = value
     return metadata
 
-def import_yaml(path):
+def import_yaml(path, files):
     """
-    Import any data in user.yaml or jenkins.yaml
-    into the metadata dictionary
     """
     metadata = {}
-    if os.path.exists(path+'/hiera_data/user.yaml'):
-        with open(path+'/hiera_data/user.yaml', 'r') as f:
-            y = yaml.load(f.read())
-            if y:
-                for key, value in y.items():
-                    metadata[key] = value
-    if os.path.exists(path+'/hiera_data/jenkins.yaml'):
-        with open(path+'/hiera_data/jenkins.yaml', 'r') as f:
-            y = yaml.load(f.read())
-            if y:
-                for key, value in y.items():
-                    metadata[key] = value
+
+    for filename in files:
+        if os.path.exists(path+filename+'.yaml'):
+            with open(path+filename+'.yaml', 'r') as f:
+                y = yaml.load(f.read())
+                if y:
+                    for key, value in y.items():
+                        metadata[key] = value
     return metadata
 
-def build_metadata(path):
+def build_metadata(path, scenario, config):
     """
     Create a metadata dictionary from yaml
     and environment variables
     """
-    return import_environ_keys(import_yaml(path))
-        
+    if config == "config":
+        prefix = 'osi_config_'
+        files = ['config']
+        return import_environ_keys(import_yaml(path+'/'), prefix)
+    if config == 'user':
+        prefix = 'osi_user_'
+        files = ['user', 'jenkins', 'user.common', 'user.'+scenario]
+        return import_environ_keys(import_yaml(path+'/hiera_data/'), prefix)
+    else:
+        print "Invalid config type: choose from 'user' and 'config'"
+

@@ -226,33 +226,31 @@ def make(n, q, args):
     control_node_internal = net1_ports[0]['fixed_ips'][0]['ip_address']
 
     # config is a dictionary updated from env vars and user supplied
-    # yaml files
-    config_meta =  build_metadata(data_path)
-    dprint('Metadata Without hardcodes ' + str(config_meta))
+    # yaml files to serve as input to hiera
+    hiera_config_meta =  build_metadata(data_path, scenario, 'user')
+    dprint('Metadata Without hardcodes ' + str(hiera_config_meta))
 
-    config_meta.update({'controller_public_address'   : str(control_node_ip),
+    hiera_config_meta.update({'controller_public_address'   : str(control_node_ip),
                       'controller_internal_address' : str(control_node_ip),
                       'controller_admin_address'    : str(control_node_ip),
                       'cobbler_node_ip'             : str(build_node_ip),
                       'ci_test_id'                  : test_id
                     })
 
-    dprint('Metadata With hardcodes ' + str(config_meta))
+    dprint('Metadata With hardcodes ' + str(hiera_config_meta))
 
-    build_deploy = fragment.compose('build-server', data_path, fragment_path, scenario, config_meta)
-    control_deploy = fragment.compose('control-server', data_path, fragment_path, scenario, config_meta)
-    compute_deploy = fragment.compose('compute-server02', data_path, fragment_path, scenario, config_meta)
+    initial_config_meta = build_metadata(data_path, scenario, 'config')
+
+    build_deploy = fragment.compose('build-server', data_path, fragment_path, scenario, initial_config_meta)
+    control_deploy = fragment.compose('control-server', data_path, fragment_path, scenario, initial_config_meta)
+    compute_deploy = fragment.compose('compute-server02', data_path, fragment_path, scenario, initial_config_meta)
 
     dprint('build_deploy: ' + str(build_deploy))
     dprint('control_deploy: ' + str(control_deploy))
     dprint('compute_deploy: ' + str(compute_deploy))
 
-    # Appease the boot command's desire for a file
-    config_yaml = yaml.dump(config_meta, default_flow_style=False)
-    #dump = open('./user_config_' + str(test_id) + '.yaml', 'w')
-    #dump.write(str(config_yaml))
-    #dump.close()
-    #config_yaml = open('./user_config_' + str(test_id) + '.yaml', 'r')
+    user_config_yaml = yaml.dump(hiera_config_meta, default_flow_style=False)
+    initial_config_yaml = yaml.dump(initial_config_meta, default_flow_style=False)
 
     dprint('Metadata Yaml: ' + str(config_yaml))
 
@@ -262,7 +260,8 @@ def make(n, q, args):
                     build_nic_port_list([ci_ports[0]['id']]),
                     deploy=build_deploy,
                     files={u'/root/hiera_config.py': build_server_hiera_config(),
-                           u'/root/meta_data.yaml' : config_yaml},
+                           u'/root/user.yaml' : user_config_yaml},
+                           u'/root/config.yaml' : initial_config_yaml},
                     meta={'ci_test_id' : test_id}
                     )
 
@@ -276,7 +275,7 @@ def make(n, q, args):
                        image, 
                        control_nics,
                        deploy=control_deploy,
-                       files={u'/root/meta_data.yaml' : config_yaml},
+                       #files={u'/root/meta_data.yaml' : config_yaml},
                        meta={'ci_test_id' : test_id})
 
     compute_node = boot_puppetised_instance(n, 
@@ -284,7 +283,7 @@ def make(n, q, args):
                        image, 
                        build_nic_net_list([get_ci_network(q), test_net1]),
                        deploy=compute_deploy,
-                       files={u'/root/meta_data.yaml' : config_yaml},
+                       #files={u'/root/meta_data.yaml' : config_yaml},
                        meta={'ci_test_id' : test_id})
 
 def get(n, q, args):

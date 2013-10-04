@@ -35,7 +35,7 @@ admin_password: Cisco123
 admin_token: keystone_admin_token
 network_service_password: quantum_pass
 rpc_password: openstack_rabbit_password
-metadata_shared_secret: metadata_shared_secret,
+metadata_shared_secret: metadata_shared_secret
 horizon_secret_key: horizon_secret_key
 
 # for single password config

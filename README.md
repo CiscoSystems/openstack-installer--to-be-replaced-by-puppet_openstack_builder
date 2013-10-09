@@ -173,21 +173,19 @@ basic install against already provisioned nodes:
 
 first, log into your build server, and set it up:
 
- > export build_server_ip=X.X.X.X ; bash <(curl -fsS https://raw.github.com/CiscoSystems/openstack-installer/master/install-scripts/setup.sh)
-
-then, install it as a puppet master
-
- > bash /root/openstack-installer/install-scripts/master.sh 
+    export build_server_ip=X.X.X.X ; bash <(curl -fsS https://raw.github.com/CiscoSystems/openstack-installer/master/install-scripts/master.sh)
 
 download all plugins for your puppetmaster
 
- > puppet plugin download --server `hostname -f`; service apache2 restart
+``
+    puppet plugin download --server `hostname -f`; service apache2 restart
+``
 
 ### set up your data
 
 on your build server, all of the data you may need to override can be found in:
 
-   /etc/puppet/data/user.common
+    /etc/puppet/data/hiera_data/user.common.yaml
 
 at the very least, you may need to update the controller ip addresses and set the
 interfaces to use.
@@ -206,13 +204,15 @@ Choices are in:
 
 ### install each of your components
 
-  first setup each node:
+first setup each node (unless you're doing all_in_one scenario):
 
-  > export build_server_ip=X.X.X.X ; bash <(curl -fsS https://raw.github.com/CiscoSystems/openstack-installer/master/install-scripts/setup.sh)
+    export build_server_ip=X.X.X.X ; bash <(curl -fsS https://raw.github.com/CiscoSystems/openstack-installer/master/install-scripts/setup.sh)
 
-  log into each server, and run (in a controller/compute scenario, you need to install the controller first):
+log into each server, and run (in a controller/compute scenario, you need to install the controller firsti, and you do this on the allinone node as well):
 
-  > puppet agent -td --server build-server.<DOMAIN_NAME> --certname <ROLE_CERT_NAME>
+``
+    puppet agent -td --server build-server.`hostname -d` --certname `hostname -f`
+``
 
-  where build-server is the fully qualified name of the build server or its IP address that was set in user.common.yaml and ROLE\_CERT\_NAME is the fully qualified name of the local machine (or `hostname -f` which should return the same thing)
+where build-server is the fully qualified name of the build server or its IP address that was set in user.common.yaml and ROLE\_CERT\_NAME is the fully qualified name of the local machine (or `` `hostname -f` `` which should return the same thing)
 

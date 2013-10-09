@@ -24,6 +24,10 @@ case $::osfamily {
     $pkg_list       = ['git', 'curl', 'vim', 'cobbler']
     package { 'puppet-common':
       ensure => $puppet_version,
+    } ->
+    package { 'puppetmaster-common':
+      ensure => $puppet_version,
+      before => Package['puppet'],
     }
   }
 }
@@ -38,6 +42,50 @@ if $::build_server_ip {
     ip => $::build_server_ip,
     host_aliases => "build-server.${::build_server_domain_name}"
   }
+}
+
+# set up our hiera-store!
+file { "${settings::confdir}/hiera.yaml":
+  content =>
+'
+---
+:backends:
+  - data_mapper
+:hierarchy:
+  - "hostname/%{hostname}"
+  - "client/%{clientcert}"
+  - user
+  - jenkins
+  - user.%{scenario}
+  - user.common
+  - "enable_ha/%{enable_ha}"
+  - "cinder_backend/%{cinder_backend}"
+  - "glance_backend/%{glance_backend}"
+  - "rpc_type/%{rpc_type}"
+  - "db_type/%{db_type}"
+  - "tenant_network_type/%{tenant_network_type}"
+  - "network_type/%{network_type}"
+  - "network_plugin/%{network_plugin}"
+  - "password_management/%{password_management}"
+  - "scenario/%{scenario}"
+  - grizzly_hack
+  - common
+:yaml:
+   :datadir: /etc/puppet/data/hiera_data
+:data_mapper:
+   # this should be contained in a module
+   :datadir: /etc/puppet/data/data_mappings
+'
+}
+
+# add the correct node terminus
+ini_setting {'puppetmastermodulepath':
+  ensure  => present,
+  path    => '/etc/puppet/puppet.conf',
+  section => 'main',
+  setting => 'node_terminus',
+  value   => 'scenario',
+  require => Package['puppet'],
 }
 
 # lay down a file that can be used for subsequent runs to puppet. Often, the

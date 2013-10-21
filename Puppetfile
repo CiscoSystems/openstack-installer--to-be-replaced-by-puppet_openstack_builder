@@ -118,6 +118,8 @@ mod 'CiscoSystems/ntp', :git => "#{base_url}/#{puppetlabs_module_prefix}ntp", :r
 mod 'CiscoSystems/rsync', :git => "#{base_url}/#{puppetlabs_module_prefix}rsync", :ref => branch_name
 mod 'CiscoSystems/mysql', :git => "#{base_url}/#{puppetlabs_module_prefix}mysql", :ref => mysql_branch
 mod 'CiscoSystems/rabbitmq', :git => "#{base_url}/#{puppetlabs_module_prefix}rabbitmq", :ref => rabbitmq_branch
+mod 'CiscoSystems/mongodb', :git => "#{base_url}/#{puppetlabs_module_prefix}mongodb", :ref => branch_name
+
 
 
 ##### modules with other upstreams #####

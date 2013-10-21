@@ -1,6 +1,6 @@
 classes:
-  - ceilometer
   - mongodb
+  - ceilometer
   - ceilometer::keystone::auth
   - ceilometer::db
   - ceilometer::collector

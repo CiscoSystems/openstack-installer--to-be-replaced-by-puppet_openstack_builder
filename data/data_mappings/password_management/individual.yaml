@@ -76,4 +76,5 @@ ceilometer_metering_secret:
   - ceilometer::metering_secret
 ceilometer_service_password:
   - ceilometer::keystone::auth::password
-  - ceilometer::api::admin_password
+  - ceilometer::api::keystone_password
+  - ceilometer::agent::auth::auth_password

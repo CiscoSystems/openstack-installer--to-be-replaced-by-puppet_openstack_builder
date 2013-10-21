@@ -9,6 +9,7 @@ enabled_services:
   # should I be able to interpolate this?
   - "%{network_service}"
   - swift
+  - ceilometer
 
 allowed_hosts: "%"
 

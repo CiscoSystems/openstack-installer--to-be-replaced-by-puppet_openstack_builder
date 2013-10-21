@@ -1,0 +1,8 @@
+classes:
+  - ceilometer
+  - mongodb
+  - ceilometer::keystone::auth
+  - ceilometer::db
+  - ceilometer::collector
+  - ceilometer::agent::central
+  - ceilometer::api

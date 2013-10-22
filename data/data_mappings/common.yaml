@@ -142,7 +142,6 @@ compute_internal_address:
   - neutron::plugins::ovs::sql_connection
   - neutron::plugins::linuxbridge::sql_connection
 "%{ceilometer_db_type}://ceilometer:%{ceilometer_db_password}@%{controller_internal_address}/ceilometer":
-  - ceilometer::database_connection
   - ceilometer::db::database_connection
 "http://%{controller_internal_address}:9696":
   - nova::network::quantum::quantum_url

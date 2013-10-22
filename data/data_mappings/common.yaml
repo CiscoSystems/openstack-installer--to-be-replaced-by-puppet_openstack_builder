@@ -156,5 +156,9 @@ compute_internal_address:
   - ceilometer::agent::auth::auth_url
 "%{controller_internal_address}:9292":
   - nova::glance_api_servers
+# cisco specific data
 build_node_name:
-  coe::base::build_node_name
+  - coe::base::build_node_name
+  - collectd::graphitehost
+public_interface:
+  - collectd::management_interface

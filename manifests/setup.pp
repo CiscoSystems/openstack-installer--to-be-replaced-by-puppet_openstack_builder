@@ -24,6 +24,7 @@ case $::osfamily {
     $pkg_list       = ['git', 'curl', 'vim', 'cobbler']
     package { 'puppet-common':
       ensure => $puppet_version,
+      require => Apt::Source[puppetlabs]
     }
   }
 }
@@ -51,6 +52,10 @@ if $::puppet_run_mode != 'agent' {
       ensure  => $puppet_version,
       before  => Package['puppet'],
       require => Package['puppet-common']
+    }
+    package { 'puppetmaster-passenger':
+      ensure  => $puppet_version,
+      require => Package['puppet'],
     }
   }
 

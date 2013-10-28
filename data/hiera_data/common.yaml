@@ -16,6 +16,7 @@ allowed_hosts: "%"
 admin_email: root@localhost
 rpc_user: openstack_rabbit_user
 verbose: false
+debug: false
 cinder::scheduler::scheduler_driver: 'cinder.scheduler.simple.SimpleScheduler'
 nova::compute::quantum::libvirt_vif_driver: nova.virt.libvirt.vif.LibvirtHybridOVSBridgeDriver
 nova::compute::neutron::libvirt_vif_driver: nova.virt.libvirt.vif.LibvirtHybridOVSBridgeDriver
@@ -27,7 +28,7 @@ nova::compute::libvirt::vncserver_listen: 0.0.0.0
 nova::compute::force_config_drive: true
 
 # information for package repos
-coe::base::openstack_release: grizzly
+coe::base::openstack_release: havana
 coe::base::package_repo: cloud_archive
 
 # used for testing
@@ -47,3 +48,6 @@ openstack::swift::storage-node::storage_devices:
   - 3
 
 apache::mpm_module: prefork
+
+# Fix odd behaviors
+horizon::django_debug: true

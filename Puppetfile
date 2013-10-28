@@ -120,7 +120,6 @@ end
 
 ##### Puppet Labs modules #####
 
-
 # this module needs to be alighed with upstream
 mod 'puppetlabs/apt',
   :git => "#{base_url}/CiscoSystems/puppet-apt",
@@ -131,7 +130,8 @@ mod 'puppetlabs/apt',
   'xinetd',
   'ntp',
   'rsync',
-  'inifile'
+  'inifile',
+  'mongodb'
 ].each do |module_name|
   mod "puppetlabs/#{module_name}",
     :git => "#{base_url}/#{puppetlabs_module_prefix}#{module_name}",

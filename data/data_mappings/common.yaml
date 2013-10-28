@@ -8,6 +8,7 @@ debug:
   - neutron::debug
   - quatum::agents::dhcp::debug
   - quatum::agents::metadata::debug
+  - heat::debug
 verbose:
   - cinder::verbose
   - glance::api::verbose
@@ -15,6 +16,7 @@ verbose:
   - keystone::verbose
   - quantum::verbose
   - neutron::verbose
+  - heat::verbose
 admin_email:
   - keystone::roles::admin::email
 # this needs to be supplied as a defualt
@@ -31,6 +33,7 @@ rpc_user:
   - neutron::rabbit_user
   - quantum::qpid_username
   - neutron::qpid_username
+  - heat::rabbit_userid
 enabled_services:
   - coi::profiles::openstack::endpoints::enabled_services
   - coi::profiles::openstack::databases::mysql::enabled_services
@@ -88,6 +91,7 @@ controller_internal_address:
   - swift::keystone::auth::internal_address
   - coe::base::controller_node_internal
   - coe::base::controller_hostname
+  - heat::rabbit_host
 controller_public_address:
   - nova::vncproxy::host
   - nova::compute::vncproxy_host

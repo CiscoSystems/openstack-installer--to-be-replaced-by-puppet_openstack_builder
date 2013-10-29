@@ -16,3 +16,6 @@ network_type: per-tenant-router
 # supports gre or vlan
 tenant_network_type: gre
 enable_ha: false
+# ceph priveleged user account
+ceph_deploy_user: ceph
+ceph_deploy_password: d32ad2q3diadad321

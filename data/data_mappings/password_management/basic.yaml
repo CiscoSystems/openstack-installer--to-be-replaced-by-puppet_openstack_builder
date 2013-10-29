@@ -58,3 +58,4 @@ password:
   - quantum::agents::metadata::auth_password
   - neutron::agents::metadata::auth_password
   - openstack::auth_file::admin_password
+  - heat::keystone_password

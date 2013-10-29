@@ -62,6 +62,7 @@ rpc_password:
   - quantum::qpid_password
   - neutron::rabbit_password
   - neutron::qpid_password
+  - heat::rabbit_password
 metadata_shared_secret:
   - quantum::agents::metadata::shared_secret
   - neutron::agents::metadata::shared_secret
@@ -69,3 +70,5 @@ metadata_shared_secret:
   - nova::api::neutron_metadata_proxy_shared_secret
 horizon_secret_key:
   - horizon::secret_key
+heat_db_password:
+  - heat::db::mysql::password

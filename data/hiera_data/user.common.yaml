@@ -8,7 +8,7 @@ controller_internal_address: 192.168.242.10
 controller_public_address: 192.168.242.10
 controller_admin_address: 192.168.242.10
 swift_internal_address: 192.168.242.41
-wift_public_address: 192.168.242.41
+swift_public_address: 192.168.242.41
 swift_admin_address: 192.168.242.41
 
 # this is not done yet

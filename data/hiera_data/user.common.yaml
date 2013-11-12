@@ -8,7 +8,7 @@ controller_internal_address: 192.168.242.10
 controller_public_address: 192.168.242.10
 controller_admin_address: 192.168.242.10
 swift_internal_address: 192.168.242.41
-swift_public_address: 192.168.242.41
+wift_public_address: 192.168.242.41
 swift_admin_address: 192.168.242.41
 
 # this is not done yet
@@ -40,6 +40,8 @@ metadata_shared_secret: metadata_shared_secret
 horizon_secret_key: horizon_secret_key
 ceilometer_metering_secret: ceilometer_metering_secret
 ceilometer_db_password: ceilometer
+heat_db_password: heat
+heat_service_password: heat_pass
 # for single password config
 secret_key: secret
 password: password123

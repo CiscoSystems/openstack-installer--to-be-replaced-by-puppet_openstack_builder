@@ -85,3 +85,4 @@ heat_db_password:
 heat_service_password:
   - heat::keystone::auth::password
   - heat::keystone::auth_cfn::password
+  - heat::keystone_password

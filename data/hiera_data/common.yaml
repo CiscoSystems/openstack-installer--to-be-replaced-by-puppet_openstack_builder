@@ -30,6 +30,7 @@ nova::compute::force_config_drive: true
 # information for package repos
 coe::base::openstack_release: havana
 coe::base::package_repo: cisco_repo
+coe::base::openstack_repo_location: 'http://openstack-repo.cisco.com/openstack'
 
 # used for testing
 openstack::test_file::image_type: cirros

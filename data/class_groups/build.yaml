@@ -1,5 +1,6 @@
 classes:
   - apache
+  - apache::proxy
   - naginator
   - collectd
   # - coi::profiles::cobbler_server

@@ -1,21 +1,16 @@
 #!/usr/bin/env python
-
+import os
 import sys
 import yaml
 import argparse
 import xmlrpclib
 
 
-server = xmlrpclib.Server("http://localhost/cobbler_api")
-cobbler_user = "cobbler"
-cobbler_pass = ""
-
-token = server.login(cobbler_user,cobbler_pass)
-
 token = None
 server=None
 
 def cobbler_connect(cobbler_user,cobbler_pass):
+    global token,server
     try:
         server = xmlrpclib.Server("http://localhost/cobbler_api")
         token = server.login(cobbler_user,cobbler_pass) 
@@ -117,14 +112,16 @@ def main():
     parser.add_argument("-u", "--user", dest="user", 
                         metavar="COBBLER_USER", type=str,
                         help="cobbler user", default='cobbler')
-    parser.add_argument("-p", "--password", dest="pass", 
+    parser.add_argument("-p", "--password", dest="password", 
                         metavar="COBBLER_PASS", type=str,
                         help="cobbler password", default='')  
                                                               
     params = parser.parse_args()
+
+  
     
     if not os.path.exists(params.yaml):
-        parser.error("Yaml file %s does not exist." % (params.file))
+        parser.error("Yaml file %s does not exist." % (params.yaml))
         sys.exit(1)
          
     if not cobbler_connect(params.user,params.password):
@@ -137,7 +134,7 @@ def main():
     for name in nodes:
       if name == 'profile':
           profile = nodes[name]
-          update_profile(name,nodes['profile'])
+          update_profile(nodes['profile'])
 
       if name == 'node-global':
           node_globals = nodes[name]

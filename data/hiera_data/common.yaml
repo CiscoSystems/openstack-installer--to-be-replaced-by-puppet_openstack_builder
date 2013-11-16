@@ -48,7 +48,6 @@ openstack::swift::storage-node::storage_devices:
   - 3
 
 apache::mpm_module: prefork
-apache::mod: 'wsgi'
 
 # Fix odd behaviors
 horizon::django_debug: true

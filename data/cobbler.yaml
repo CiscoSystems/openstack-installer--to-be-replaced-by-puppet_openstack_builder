@@ -1,0 +1,285 @@
+load-balancer01:
+  hostname: "load-balancer01.cisco.com"
+  profile: "tmp-precise-x86_64"
+  netboot-enabled: "1"
+  power-address: "192.168.2.36"
+  power-type: "ipmitool"
+  power-user: "admin"
+  power-pass: "password"
+  kickstart: "/etc/cobbler/preseeds/cisco-preseed"
+  kopts: "netcfg/get_nameservers=2.4.1.254 \
+netcfg/confirm_static=true \
+netcfg/get_ipaddress=2.4.1.2 \
+netcfg/get_gateway=2.4.1.254 \
+netcfg/disable_autoconfig=true \
+netcfg/dhcp_options=\"Configure network manually\" \
+netcfg/no_default_route=true \
+partman-auto/disk=/dev/sda \
+netcfg/get_netmask=255.255.255.0 \
+netcfg/dhcp_failed=true"  
+  interfaces:
+    eth0:
+      mac: "90:e2:ba:0d:27:80"
+      dns-name: "load-balancer01.cisco.com"
+      ip-address: "2.4.1.2"
+      static: "0"
+
+load-balancer02:
+  hostname: "load-balancer02.cisco.com"
+  profile: "tmp-precise-x86_64"
+  netboot-enabled: "1"
+  power-address: "192.168.2.98"
+  power-type: "ipmitool"
+  power-user: "admin"
+  power-pass: "password"
+  kickstart: "/etc/cobbler/preseeds/cisco-preseed"
+  kopts: "netcfg/get_nameservers=2.4.1.254 \
+netcfg/confirm_static=true \
+netcfg/get_ipaddress=2.4.1.3 \
+netcfg/get_gateway=2.4.1.254 \
+netcfg/disable_autoconfig=true \
+netcfg/dhcp_options=\"Configure network manually\" \
+netcfg/no_default_route=true \
+partman-auto/disk=/dev/sda \
+netcfg/get_netmask=255.255.255.0 \
+netcfg/dhcp_failed=true"   
+  interfaces:
+    eth0:
+      mac: "90:e2:ba:0f:6c:64"
+      dns-name: "load-balancer02.cisco.com"
+      ip-address: "2.4.1.3"
+      static: "0"
+      
+swift-proxy01:
+  hostname: "swift-proxy01.cisco.com"
+  profile: "tmp-precise-x86_64"
+  netboot-enabled: "1"
+  power-address: "192.168.2.102"
+  power-type: "ipmitool"
+  power-user: "admin"
+  power-pass: "password"
+  kickstart: "/etc/cobbler/preseeds/cisco-preseed"
+  kopts: "netcfg/get_nameservers=2.4.1.254 \
+netcfg/confirm_static=true \
+netcfg/get_ipaddress=2.4.1.8 \
+netcfg/get_gateway=2.4.1.254 \
+netcfg/disable_autoconfig=true \
+netcfg/dhcp_options=\"Configure network manually\" \
+netcfg/no_default_route=true \
+partman-auto/disk=/dev/sda \
+netcfg/get_netmask=255.255.255.0 \
+netcfg/dhcp_failed=true"     
+  interfaces:
+    eth0:
+      mac: "90:e2:ba:0d:27:10"
+      dns-name: "swift-proxy01.cisco.com"
+      ip-address: "2.4.1.8"
+      static: "0"      
+      
+swift-proxy02:
+  hostname: "swift-proxy02.cisco.com"
+  profile: "tmp-precise-x86_64"
+  netboot-enabled: "1"
+  power-address: "192.168.2.103"
+  power-type: "ipmitool"
+  power-user: "admin"
+  power-pass: "password"
+  kickstart: "/etc/cobbler/preseeds/cisco-preseed"
+  kopts: "netcfg/get_nameservers=2.4.1.254 \
+  netcfg/confirm_static=true \
+  netcfg/get_ipaddress=2.4.1.9 \
+  netcfg/get_gateway=2.4.1.254 \
+  netcfg/disable_autoconfig=true \
+  netcfg/dhcp_options=\"Configure network manually\" \
+  netcfg/no_default_route=true \
+  partman-auto/disk=/dev/sda \
+  netcfg/get_netmask=255.255.255.0 \
+  netcfg/dhcp_failed=true"   
+  interfaces:
+    eth0:
+      mac: "90:e2:ba:0d:26:d4"
+      dns-name: "swift-proxy02.cisco.com"
+      ip-address: "2.4.1.9"
+      static: "0" 
+      
+swift-storage01:
+  hostname: "swift-storage01.cisco.com"
+  profile: "tmp-precise-x86_64"
+  netboot-enabled: "1"
+  power-address: "192.168.2.99"
+  power-type: "ipmitool"
+  power-user: "admin"
+  power-pass: "password"
+  kickstart: "/etc/cobbler/preseeds/cisco-preseed"
+  kopts: "netcfg/get_nameservers=2.4.1.254 \
+  netcfg/confirm_static=true \
+  netcfg/get_ipaddress=2.4.1.5 \
+  netcfg/get_gateway=2.4.1.254 \
+  netcfg/disable_autoconfig=true \
+  netcfg/dhcp_options=\"Configure network manually\" \
+  netcfg/no_default_route=true \
+  partman-auto/disk=/dev/sda \
+  netcfg/get_netmask=255.255.255.0 \
+  netcfg/dhcp_failed=true"   
+  interfaces:
+    eth0:
+      mac: "90:e2:ba:0f:6b:7c"
+      dns-name: "swift-storage01.cisco.com"
+      ip-address: "2.4.1.5"
+      static: "0"           
+
+swift-storage02:
+  hostname: "swift-storage02.cisco.com"
+  profile: "tmp-precise-x86_64"
+  netboot-enabled: "1"
+  power-address: "192.168.2.100"
+  power-type: "ipmitool"
+  power-user: "admin"
+  power-pass: "password"
+  kickstart: "/etc/cobbler/preseeds/cisco-preseed"
+  kopts: "netcfg/get_nameservers=2.4.1.254 \
+netcfg/confirm_static=true \
+netcfg/get_ipaddress=2.4.1.6 \
+netcfg/get_gateway=2.4.1.254 \
+netcfg/disable_autoconfig=true \
+netcfg/dhcp_options=\"Configure network manually\" \
+netcfg/no_default_route=true \
+partman-auto/disk=/dev/sda \
+netcfg/get_netmask=255.255.255.0 \
+netcfg/dhcp_failed=true"     
+  interfaces:
+    eth0:
+      mac: "90:e2:ba:0d:26:88"
+      dns-name: "swift-storage02.cisco.com"
+      ip-address: "2.4.1.6"
+      static: "0" 
+
+swift-storage03:
+  hostname: "swift-storage03.cisco.com"
+  profile: "tmp-precise-x86_64"
+  netboot-enabled: "1"
+  power-address: "192.168.2.101"
+  power-type: "ipmitool"
+  power-user: "admin"
+  power-pass: "password"
+  kickstart: "/etc/cobbler/preseeds/cisco-preseed"
+  kopts: "netcfg/get_nameservers=2.4.1.254 \
+netcfg/confirm_static=true \
+netcfg/get_ipaddress=2.4.1.7 \
+netcfg/get_gateway=2.4.1.254 \
+netcfg/disable_autoconfig=true \
+netcfg/dhcp_options=\"Configure network manually\" \
+netcfg/no_default_route=true \
+partman-auto/disk=/dev/sda \
+netcfg/get_netmask=255.255.255.0 \
+netcfg/dhcp_failed=true"     
+  interfaces:
+    eth0:
+      mac: "90:e2:ba:0d:27:9c"
+      dns-name: "swift-storage03.cisco.com"
+      ip-address: "2.4.1.7"
+      static: "0"       
+
+control-server:
+  hostname: "control-server.cisco.com"
+  profile: "tmp-precise-x86_64"
+  netboot-enabled: "1"
+  power-address: "192.168.2.104"
+  power-type: "ipmitool"
+  power-user: "admin"
+  power-pass: "password"
+  kickstart: "/etc/cobbler/preseeds/cisco-preseed"
+  kopts: "netcfg/get_nameservers=2.4.1.254 \
+netcfg/confirm_static=true \
+netcfg/get_ipaddress=2.4.1.10 \
+netcfg/get_gateway=2.4.1.254 \
+netcfg/disable_autoconfig=true \
+netcfg/dhcp_options=\"Configure network manually\" \
+netcfg/no_default_route=true \
+partman-auto/disk=/dev/sda \
+netcfg/get_netmask=255.255.255.0 \
+netcfg/dhcp_failed=true"     
+  interfaces:
+    eth0:
+      mac: "90:e2:ba:0d:26:70"
+      dns-name: "control-server.cisco.com"
+      ip-address: "2.4.1.10"
+      static: "0"
+
+control-server2:
+  hostname: "control-server2.cisco.com"
+  profile: "tmp-precise-x86_64"
+  netboot-enabled: "1"
+  power-address: "192.168.2.105"
+  power-type: "ipmitool"
+  power-user: "admin"
+  power-pass: "password"
+  kickstart: "/etc/cobbler/preseeds/cisco-preseed"
+  kopts: "netcfg/get_nameservers=2.4.1.254 \
+netcfg/confirm_static=true \
+netcfg/get_ipaddress=2.4.1.11 \
+netcfg/get_gateway=2.4.1.254 \
+netcfg/disable_autoconfig=true \
+netcfg/dhcp_options=\"Configure network manually\" \
+netcfg/no_default_route=true \
+partman-auto/disk=/dev/sda \
+netcfg/get_netmask=255.255.255.0 \
+netcfg/dhcp_failed=true"     
+  interfaces:
+    eth0:
+      mac: "90:e2:ba:0f:6b:cc"
+      dns-name: "control-server2.cisco.com"
+      ip-address: "2.4.1.11"
+      static: "0"
+
+control-server3:
+  hostname: "control-server3.cisco.com"
+  profile: "tmp-precise-x86_64"
+  netboot-enabled: "1"
+  power-address: "192.168.2.106"
+  power-type: "ipmitool"
+  power-user: "admin"
+  power-pass: "password"
+  kickstart: "/etc/cobbler/preseeds/cisco-preseed" 
+  kopts: "netcfg/get_nameservers=2.4.1.254 \
+netcfg/confirm_static=true \
+netcfg/get_ipaddress=2.4.1.12 \
+netcfg/get_gateway=2.4.1.254 \
+netcfg/disable_autoconfig=true \
+netcfg/dhcp_options=\"Configure network manually\" \
+netcfg/no_default_route=true \
+partman-auto/disk=/dev/sda \
+netcfg/get_netmask=255.255.255.0 \
+netcfg/dhcp_failed=true"    
+  interfaces:
+    eth0:
+      mac: "90:e2:ba:0d:26:28"
+      dns-name: "control-server3.cisco.com"
+      ip-address: "2.4.1.12"
+      static: "0" 
+           
+compute-server:
+  hostname: "compute-server.cisco.com"
+  profile: "tmp-precise-x86_64"
+  netboot-enabled: "1"
+  power-address: "192.168.2.107"
+  power-type: "ipmitool"
+  power-user: "admin"
+  power-pass: "password"
+  kickstart: "/etc/cobbler/preseeds/cisco-preseed" 
+  kopts: "netcfg/get_nameservers=2.4.1.254 \
+netcfg/confirm_static=true \
+netcfg/get_ipaddress=2.4.1.13 \
+netcfg/get_gateway=2.4.1.254 \
+netcfg/disable_autoconfig=true \
+netcfg/dhcp_options=\"Configure network manually\" \
+netcfg/no_default_route=true \
+partman-auto/disk=/dev/sda \
+netcfg/get_netmask=255.255.255.0 \
+netcfg/dhcp_failed=true"    
+  interfaces:
+    eth0:
+      mac: "90:e2:ba:0d:27:30"
+      dns-name: "compute-server.cisco.com"
+      ip-address: "2.4.1.13"
+      static: "0" 

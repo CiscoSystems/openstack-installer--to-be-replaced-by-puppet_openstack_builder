@@ -4,5 +4,20 @@ apt_cache:  '192.168.242.99' # Apt cache server, set to 'false' to disable
 apt_mirror: 'us.archive.ubuntu.com'
 domain:     'domain.name'
 verbose:    false
+# Set this to 'Ubuntu' if using scenariobuilder, otherwise
+# Facter will get very confused.
 operatingsystem: ubuntu
 scenario: 2_role
+
+# Additional Config available for use by scenariobuilder during
+# the bootstrap process. The defaults provided are those used in
+# the Cisco DMZ, and may not apply to you.
+
+#initial_ntp: 192.168.26.186
+#installer_repo: CiscoSystems
+#installer_branch: master
+#openstack_version: havana
+#apt_mirror_ip: 192.168.26.170
+#apt_proxy_host: 192.168.26.170
+#apt_proxy_port: 8000
+#git_protocol: git

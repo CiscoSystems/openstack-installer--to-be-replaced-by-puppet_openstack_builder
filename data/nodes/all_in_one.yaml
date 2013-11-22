@@ -38,4 +38,4 @@ nodes:
       ci:
       internal:
     flavor:     'm1.medium'
-    image:      'precise-x86_64':
+    image:      'precise-x86_64'

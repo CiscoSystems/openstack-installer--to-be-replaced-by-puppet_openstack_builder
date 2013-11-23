@@ -1,5 +1,5 @@
 nodes:
-  build:
+  build-server:
     hostname: build-server
     memory: 2500
     ip_num: 100
@@ -13,7 +13,7 @@ nodes:
     networks:
       ci:
 
-  all_in_one:
+  all-in-one:
     hostname:    all-in-one
     memory:      3000
     ip_number:   10
@@ -29,12 +29,15 @@ nodes:
       external:
     flavor:     'm1.large'
     image:      'precise-x86_64'
+    wait:
+      - build-server
 
-  compute_basevm:
+  compute-server02:
     hostname:   compute-server02
     memory:     2512
     ip_number:  21
     wait:
+      - build-server
       - all-in-one
     networks:
       ci:

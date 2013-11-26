@@ -1,3 +1,9 @@
+NOTE: THIS HAS BEEN REPLACED BY puppet_openstack_builder
+
+See github.com/stackforge/puppet_openstack_builder for the upstream
+
+See github.com/CiscoSystems/puppet_openstack_builder for Cisco's dev version for COI
+
 Openstack Installer
 ================
 

@@ -1,2 +1,2 @@
-puppet::master::version: 3.2.3-1puppetlabs1
-puppet::agent::version: 3.2.3-1puppetlabs1
+puppet::master::version: latest
+puppet::agent::version: latest

@@ -1,0 +1,6 @@
+galera::server::master_ip: false
+coe::network::interface::interface_name: 'eth1'
+coe::network::interface::method: 'manual'
+coe::network::interface::options:
+  up: 'ifconfig $IFACE 0.0.0.0 up'
+  down: 'ifconfig $IFACE 0.0.0.0 down' 
